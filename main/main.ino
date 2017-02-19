@@ -1,6 +1,4 @@
-
 #include "FanController.h"
-
 
 const int fullSpeed = 255; // pwm value
 const int minSpeed = 75;   // pwm value
