@@ -18,30 +18,33 @@ class Fan
 
     FanRule fanRules[MAX_NUM_FAN_RULES];
 
+    // *****************************
+    // **** PRIVATE
+    // *****************************
     int sizeofRules();
-
     void setPWMSpeed(int value);
 
   public:
     Fan();
     Fan(int fanPin);
 
+    // *****************************
+    // **** PUBLIC
+    // *****************************
     void listRules();
     void addRule(int start, int end, int speed);
     void setup();
     void setSpeedPercentage(int value);
 
-    // getter setter
+    // *****************************
+    // **** GETTER && SETTER
+    // *****************************
     boolean isNull();
-
     int getPin();
-
     void setStartUpDelay(int startUpDelay);
     int getStartUpDelay();
-
     void setMaxSpeed(int fullSpeed);
     int getMaxSpeed();
-
     void setMinSpeed(int minSpeed);
     int getMinSpeed();
 

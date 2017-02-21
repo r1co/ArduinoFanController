@@ -11,18 +11,22 @@ class FanRule
     int tempEnd;
     int speed;
 
-
   public:
     FanRule();
     FanRule(int tStart, int tEnd, int tSpeed);
 
+    // *****************************
+    // **** PUBLIC
+    String toString();
+
+    // *****************************
+    // **** GETTER && SETTER
+    // *****************************
     boolean isRule();
     int getStart();
-
     int getEnd();
     int getSpeed();
 
-    String toString();
 };
 
 #endif

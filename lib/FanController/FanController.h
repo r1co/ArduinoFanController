@@ -18,24 +18,32 @@ class FanController
   private:
     int powerPin;
     int powerStatus;
-
     int sensorValue;
 
     Fan fans[MAX_NUM_FANS];
     DeviceMode deviceMode;
     DeviceMode deviceModePreOff;
 
+    // *****************************
+    // **** PRIVATE
+    // *****************************
     int sizeofFans();
     void checkPowerStatus();
 
   public:
     FanController(int powerPin);
+
+    // *****************************
+    // **** PUBLIC
+    // *****************************
     void setup(DeviceMode mode);
     void addFan(Fan fan);
     void run();
+
+    // *****************************
+    // **** GETTER && SETTER
+    // *****************************
     void setDeviceMode(DeviceMode mode);
-
-
 
 };
 

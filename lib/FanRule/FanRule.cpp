@@ -13,6 +13,9 @@ FanRule::FanRule(int tStart, int tEnd, int tSpeed) {
 
 }
 
+// *****************************
+// **** GETTER && SETTER
+// *****************************
 boolean FanRule::isRule() {
   return !_isNull;
 }
