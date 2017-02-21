@@ -27,6 +27,8 @@ void setup() {
   // fan2.addRule(51, 100, 100);
 
   Fan fan3 = Fan(11);
+  fan3.setStartUpDelay(5000); // fan needs to run longer at full speed befor slowing down
+  
   // fan3.addRule(0, 49, 0);
   // fan3.addRule(50, 100, 100);
 

@@ -5,9 +5,25 @@
 FanController::FanController(int powerPin)
 {
   this->powerPin = powerPin;
-
   this->deviceMode = OFF;
   this->deviceModePreOff = deviceMode;
+}
+
+void FanController::setup(DeviceMode deviceMode) {
+  Serial.println("Setup");
+
+  // set timer, avoid noise
+  TCCR1B = ( TCCR1B & 0b11111000 ) | 0x01;
+  TCCR2B = ( TCCR2B & 0b11111000 ) | 0x01;
+
+  for (int i = 0; i < sizeofFans(); i++) {
+    fans[i].setup();
+  }
+
+  Serial.print("\n\n\n");
+
+  this->deviceMode = deviceMode;
+  this->checkPowerStatus();
 }
 
 void FanController::checkPowerStatus() {
@@ -26,30 +42,7 @@ void FanController::checkPowerStatus() {
     }
 
     powerStatus = newPowerStatus;
-
   }
-
-
-
-}
-
-
-void FanController::setup(DeviceMode deviceMode) {
-  Serial.println("Setup");
-
-  // set timer, avoid noise
-  TCCR1B = ( TCCR1B & 0b11111000 ) | 0x01;
-  TCCR2B = ( TCCR2B & 0b11111000 ) | 0x01;
-
-  for (int i = 0; i < sizeofFans(); i++) {
-    fans[i].setup();
-  }
-
-  Serial.print("\n\n\n");
-
-  this->deviceMode = deviceMode;
-
-  this->checkPowerStatus();
 }
 
 void FanController::addFan(Fan fan) {

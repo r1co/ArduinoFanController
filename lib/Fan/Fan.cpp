@@ -14,19 +14,15 @@ Fan::Fan(int fanPin)
   this->_isNull = false;
 }
 
+void Fan::setup() {
+
+}
+
 void Fan::addRule(int start, int end, int speed) {
 
   int i = sizeofRules();
 
   fanRules[i] = FanRule(start, end, speed);
-}
-
-void Fan::listRules() {
-  for (int i = 0; i < sizeofRules(); i++ ) {
-    FanRule r = fanRules[i];
-    Serial.print(r.toString());
-    Serial.println();
-  }
 }
 
 int Fan::sizeofRules() {
@@ -43,14 +39,6 @@ int Fan::sizeofRules() {
   }
 
   return num;
-}
-
-void Fan::setup() {
-  Serial.println("Setup fan ");
-  Serial.print("Rules: ");
-  Serial.print(sizeofRules());
-  Serial.println();
-  listRules();
 }
 
 void Fan::setPWMSpeed(int value){

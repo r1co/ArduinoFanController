@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "FanRule.h"
 
-const int MAX_NUM_FAN_RULES = 10;
+const int MAX_NUM_FAN_RULES = 0;
 
 class Fan
 {
