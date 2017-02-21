@@ -6,38 +6,44 @@
 
 const int MAX_NUM_FAN_RULES = 10;
 
-
-
 class Fan
 {
   private:
     boolean _isNull;
     int pin;
-    int currentSpeed;
-    String name;
-
+    int speed;
     int fullSpeed;
     int minSpeed;
     int startUpDelay;
 
     FanRule fanRules[MAX_NUM_FAN_RULES];
 
+    int sizeofRules();
+
+    void setPWMSpeed(int value);
+
   public:
     Fan();
-    Fan(String fanName, int fanPin);
+    Fan(int fanPin);
 
     void listRules();
     void addRule(int start, int end, int speed);
-    void setup(int fullSpeed, int minSpeed, int startUpDelay);
-    void runAutoMode(int sensorValue, int noRuleSpeed);
-    void setSpeed(int newSpeed);
+    void setup();
+    void setSpeedPercentage(int value);
+
+    // getter setter
+    boolean isNull();
 
     int getPin();
-    int sizeofRules();
 
-    String getName();
+    void setStartUpDelay(int startUpDelay);
+    int getStartUpDelay();
 
-    boolean isFan();
+    void setFullSpeed(int fullSpeed);
+    int getFullSpeed();
+
+    void setMinSpeed(int minSpeed);
+    int getMinSpeed();
 
 };
 

@@ -2,16 +2,12 @@
 #include "FanController.h"
 
 
-FanController::FanController(int _fullSpeed, int _minSpeed, int _startUpDelay, int _noRuleSpeed, int powerPin)
+FanController::FanController(int powerPin)
 {
-  fullSpeed = _fullSpeed;
-  minSpeed = _minSpeed;
-  startUpDelay = _startUpDelay;
-  noRuleSpeed = _noRuleSpeed;
   this->powerPin = powerPin;
 
-  deviceMode = SENSOR_SERIAL;
-  deviceModePreOff = deviceMode;
+  this->deviceMode = OFF;
+  this->deviceModePreOff = deviceMode;
 }
 
 void FanController::checkPowerStatus() {
@@ -28,7 +24,7 @@ void FanController::checkPowerStatus() {
       delay(5000);
       deviceMode = deviceModePreOff;
     }
-    
+
     powerStatus = newPowerStatus;
 
   }
@@ -38,7 +34,7 @@ void FanController::checkPowerStatus() {
 }
 
 
-void FanController::setup() {
+void FanController::setup(DeviceMode deviceMode) {
   Serial.println("Setup");
 
   // set timer, avoid noise
@@ -46,10 +42,13 @@ void FanController::setup() {
   TCCR2B = TCCR2B & 0b11111000 | 0x01;
 
   for (int i = 0; i < sizeofFans(); i++) {
-    fans[i].setup(fullSpeed, minSpeed, startUpDelay);
+    fans[i].setup();
   }
 
   Serial.print("\n\n\n");
+
+  this->deviceMode = deviceMode;
+
   this->checkPowerStatus();
 }
 
@@ -64,8 +63,7 @@ int FanController::sizeofFans() {
   int num = 0;
 
   for (int i = 0; i < rawSize; i++) {
-    Fan f = fans[i];
-    if (f.isFan()) {
+    if (fans[i].isNull()) {
       num++;
     } else {
       break;
@@ -92,11 +90,11 @@ void FanController::run() {
   switch (deviceMode) {
     case OFF:
       for (int i = 0; i < sizeofFans(); i++) {
-        fans[i].runAutoMode(0, 0);
+        fans[i].setSpeedPercentage(0);
       }
       break;
-      
-    case SENSOR_SERIAL:
+
+    case SERIAL_PERCENT:
 
       if (Serial.available() > 0) {
         // read the incoming byte:
@@ -110,14 +108,14 @@ void FanController::run() {
       }
 
       for (int i = 0; i < sizeofFans(); i++) {
-        fans[i].runAutoMode(sensorValue, noRuleSpeed);
+        fans[i].setSpeedPercentage(sensorValue);
       }
 
       break;
 
     default:
       for (int i = 0; i < sizeofFans(); i++) {
-        fans[i].runAutoMode(30, noRuleSpeed);
+        fans[i].setSpeedPercentage(30);
       }
       break;
   }
@@ -125,3 +123,6 @@ void FanController::run() {
   delay(1000);
 }
 
+void FanController::setDeviceMode(DeviceMode mode){
+  this->deviceMode = mode;
+}
