@@ -12,7 +12,7 @@ class Fan
     boolean _isNull;
     int pin;
     int speed;
-    int fullSpeed;
+    int maxSpeed;
     int minSpeed;
     int startUpDelay;
 
@@ -39,8 +39,8 @@ class Fan
     void setStartUpDelay(int startUpDelay);
     int getStartUpDelay();
 
-    void setFullSpeed(int fullSpeed);
-    int getFullSpeed();
+    void setMaxSpeed(int fullSpeed);
+    int getMaxSpeed();
 
     void setMinSpeed(int minSpeed);
     int getMinSpeed();

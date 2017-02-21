@@ -38,8 +38,8 @@ void FanController::setup(DeviceMode deviceMode) {
   Serial.println("Setup");
 
   // set timer, avoid noise
-  TCCR1B = TCCR1B & 0b11111000 | 0x01;
-  TCCR2B = TCCR2B & 0b11111000 | 0x01;
+  TCCR1B = ( TCCR1B & 0b11111000 ) | 0x01;
+  TCCR2B = ( TCCR2B & 0b11111000 ) | 0x01;
 
   for (int i = 0; i < sizeofFans(); i++) {
     fans[i].setup();

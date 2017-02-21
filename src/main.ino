@@ -1,7 +1,7 @@
-#include "FanController.h"
+#include <FanController.h>
 
-const int fullSpeed = 255; // pwm value
-const int minSpeed = 75;   // pwm value
+const int fullSpeed = 255; // pwm value - default
+const int minSpeed = 75;   // pwm value - default
 const int powerPin = 8;
 
 FanController fanController = FanController(powerPin);
@@ -12,8 +12,6 @@ void setup() {
 
 
   Fan fan1 = Fan(9);
-
-  fan1.setMinSpeed(120);
   // fan1.addRule(0, 15, 0);
   // fan1.addRule(16, 30, 30);
   // fan1.addRule(31, 40, 50);
@@ -21,6 +19,8 @@ void setup() {
   // fan1.addRule(51, 10000, 100);
 
   Fan fan2 = Fan(10);
+  fan2.setMinSpeed(minSpeed);
+  fan2.setMaxSpeed(fullSpeed);
   // fan2.addRule(0, 34, 0);
   // fan2.addRule(35, 40, 30);
   // fan2.addRule(41, 50, 75);

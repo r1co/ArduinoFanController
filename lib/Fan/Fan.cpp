@@ -9,7 +9,7 @@ Fan::Fan(int fanPin)
 {
   this->pin = fanPin;
   this->startUpDelay = 2000;
-  this->fullSpeed = 255;
+  this->maxSpeed = 255;
   this->minSpeed = 75;
   this->_isNull = false;
 }
@@ -57,13 +57,13 @@ void Fan::setPWMSpeed(int value){
 
   // if fan was stopped set fullSpeed to ensure rotation
   if(this->speed == 0 && value > 0){
-    analogWrite(this->pin , fullSpeed);
+    analogWrite(this->pin , this->maxSpeed);
     delay(1000);
   }
 
   // check limits
-  if(value > this->fullSpeed){
-    value = this->fullSpeed;
+  if(value > this->maxSpeed){
+    value = this->maxSpeed;
   }else if(value < this->minSpeed){
     value = this->minSpeed;
   }
@@ -73,7 +73,7 @@ void Fan::setPWMSpeed(int value){
 }
 
 void Fan::setSpeedPercentage(int value){
-  float onePercent = fullSpeed / 100.00;
+  float onePercent = maxSpeed / 100.00;
   int pwmSpeed = onePercent * value;
 
   this->setPWMSpeed(pwmSpeed);
@@ -93,8 +93,8 @@ void Fan::setStartUpDelay(int startUpDelay){
   this->startUpDelay = startUpDelay;
 }
 
-void Fan::setFullSpeed(int fullSpeed){
-  this->fullSpeed = fullSpeed;
+void Fan::setMaxSpeed(int maxSpeed){
+  this->maxSpeed = maxSpeed;
 }
 
 void Fan::setMinSpeed(int minSpeed){
@@ -105,8 +105,8 @@ int Fan::getStartUpDelay(){
   return this->startUpDelay;
 }
 
-int Fan::getFullSpeed(){
-  return this->fullSpeed;
+int Fan::getMaxSpeed(){
+  return this->maxSpeed;
 }
 
 int Fan::getMinSpeed(){
