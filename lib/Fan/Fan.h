@@ -35,6 +35,8 @@ class Fan
     void addRule(int start, int end, int speed);
     void setup();
     void setSpeedPercentage(int value);
+    void run();
+    void printInfo();
 
     // *****************************
     // **** GETTER && SETTER

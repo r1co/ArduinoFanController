@@ -12,6 +12,7 @@ Fan::Fan(int fanPin)
   this->startUpDelay = 2000;
   this->maxSpeed = 255;
   this->minSpeed = 75;
+  this->speed = this->minSpeed;
   this->_isNull = false;
 }
 
@@ -39,10 +40,16 @@ void Fan::setSpeedPercentage(int value){
 
 }
 
+void Fan::run(){
+  analogWrite(this->pin , this->speed);
+  // this->printInfo();
+}
+
 // *****************************
 // **** PRIVATE
 // *****************************
 void Fan::setPWMSpeed(int value){
+
 
   // if fan was stopped set fullSpeed to ensure rotation
   if(this->speed == 0 && value > 0){
@@ -51,14 +58,23 @@ void Fan::setPWMSpeed(int value){
   }
 
   // check limits
-  if(value > this->maxSpeed){
+  if(value > this->maxSpeed && value != 0){
     value = this->maxSpeed;
-  }else if(value < this->minSpeed){
+  }else if(value < this->minSpeed && value != 0){
     value = this->minSpeed;
   }
 
+  // Serial.print("Fan pin ");
+  // Serial.print(this->pin);
+  // Serial.print(" speed: ");
+  // Serial.print(value);
+  // Serial.print("pwm");
+  // Serial.println();
+
   this->speed = value;
   analogWrite(this->pin , this->speed);
+
+  // this->printInfo();
 }
 
 
@@ -76,6 +92,10 @@ int Fan::sizeofRules() {
   }
 
   return num;
+}
+
+void Fan::printInfo(){
+  Serial.println("[status] Fan [value: "+String(this->speed)+", pin: "+String(this->pin)+"]");
 }
 
 // *****************************
