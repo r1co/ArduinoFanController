@@ -19,7 +19,7 @@ void FanController::setup(DeviceMode deviceMode) {
 
   // set timer, avoid noise
   TCCR1B = ( TCCR1B & 0b11111000 ) | 0x01;
-  TCCR2B = ( TCCR2B & 0b11111000 ) | 0x01;
+  // TCCR2B = ( TCCR2B & 0b11111000 ) | 0x01;
 
   pinMode(this->powerPin, INPUT);      // sets the digital pin as output
 
