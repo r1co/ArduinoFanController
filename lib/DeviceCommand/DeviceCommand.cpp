@@ -21,6 +21,8 @@ DeviceCommand::DeviceCommand(String rawCommand){
         this->isValid = true;
       }else if(this->cmd == "setFan"){
         this->isValid = true;
+      }else if(this->cmd == "help"){
+        this->isValid = true;
       }
 
 

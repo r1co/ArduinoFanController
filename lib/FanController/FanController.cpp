@@ -92,13 +92,13 @@ void FanController::run() {
         }
     }else if(cmd.getCommand() == "set"){
         this->sensorValue = cmd.getPayload().toInt();
-        Serial.println("Controller set[sensorValue: "+cmd.getPayload()+"]");
+        Serial.println("Controller [set] sensorValue: "+cmd.getPayload());
         for (int i = 0; i < sizeofFans(); i++) {
           fans[i].setSpeedPercentage(this->sensorValue);
         }
     }else if(cmd.getCommand() == "setFan"){
         this->sensorValue = cmd.getPayload().toInt();
-        Serial.println("Controller setFan[sensorValue: "+cmd.getPayload()+"]");
+        Serial.println("Controller [setFan] sensorValue: "+cmd.getPayload());
         // Serial.println(cmd.getPayload(0));
         // Serial.println(cmd.getPayload(1));
 
@@ -113,7 +113,7 @@ void FanController::run() {
 
     }else if(cmd.getCommand() == "mode"){
         this->deviceMode = cmd.getPayload().toInt();
-        Serial.println("Controller set[mode: "+cmd.getPayload()+"]");
+        Serial.println("Controller [set] mode: "+cmd.getPayload());
 
         switch (this->deviceMode) {
           case OFF:
@@ -134,6 +134,12 @@ void FanController::run() {
             }
             break;
         }
+    }else if(cmd.getCommand() == "help"){
+      Serial.println("status - prints device status");
+      Serial.println("set - set all fans at once, value in \% | e.g. set#30 ");
+      Serial.println("setFan - set a specific fan, value in \% | e.g. set fan 9 to 50\% setFan#9=50");
+      Serial.println("mode - switch device mode. available modes: 0=OFF 1=SERIAL_CTRL | e.g. mode#1");
+      Serial.println("help - prints this message");
     }
 
   }

@@ -12,7 +12,8 @@ connected = False
 serial_port = serial.Serial("/dev/cu.usbmodem1411", 9600, timeout=0)
 
 
-
+setFan#11=100
+setFan#11=0
 
 class FanController:
     def __init__(self, **kwargs):
