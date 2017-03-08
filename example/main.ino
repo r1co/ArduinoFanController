@@ -14,6 +14,8 @@ void example_setup() {
   Fan fan1 = Fan(9);
 
   Fan fan2 = Fan(10);
+
+  // set custom min/max speed 
   fan2.setMinSpeed(minSpeed+20);
   fan2.setMaxSpeed(fullSpeed-20);
 
