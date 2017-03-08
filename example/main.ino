@@ -6,7 +6,7 @@ const int powerPin = 8;
 
 FanController fanController = FanController(powerPin);
 
-void example_setup() {
+void setup() {
   // start serial port at 9600 bps:
   Serial.begin(9600);
 
@@ -15,7 +15,7 @@ void example_setup() {
 
   Fan fan2 = Fan(10);
 
-  // set custom min/max speed 
+  // set custom min/max speed
   fan2.setMinSpeed(minSpeed+20);
   fan2.setMaxSpeed(fullSpeed-20);
 
@@ -32,7 +32,7 @@ void example_setup() {
 
 }
 
-void example_loop() {
+void loop() {
   // run fan controller
   fanController.run();
 
