@@ -1,6 +1,6 @@
 # ArduinoFanController
 
-This is a really basic framework to build a arduino based fan controller.
+This is a really basic framework to build an arduino based fan controller.
 
 ## Usage
 ```
