@@ -6,6 +6,7 @@ This is a really basic framework to build an arduino based fan controller.
 ```
 #include <FanController.h>
 
+int powerPin = 5;
 
 FanController fanController = FanController(powerPin);
 
@@ -31,6 +32,7 @@ void loop() {
 ```
 
 With this basic code deployed to your arduino you can control pwm fans via serial commands.
+As soon as the arduino detect power on pin 5 the device mode is switched to SERIAL CTRL and vise versa.
 
 ## Commands
 
